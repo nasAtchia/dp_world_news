@@ -1,4 +1,4 @@
-# Drupal World News
+# World News
 
 This Drupal module fetches and displays the latest world news.
 
