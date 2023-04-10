@@ -1,0 +1,6 @@
+name: 'World News'
+type: module
+description: 'Fetches and displays the latest world news.'
+package: Content
+core_version_requirement: ^9 || ^10
+#version: 1.0.0
