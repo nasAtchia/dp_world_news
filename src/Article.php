@@ -9,7 +9,7 @@ class Article implements ArticleInterface {
   /**
    * The content of the article.
    *
-   * @var string
+   * @var string|null
    */
   public $content;
 
@@ -58,7 +58,7 @@ class Article implements ArticleInterface {
   /**
    * Article constructor.
    *
-   * @param string $content
+   * @param string|null $content
    *   The content of the article.
    * @param string $description
    *   The description of the article.
@@ -73,7 +73,7 @@ class Article implements ArticleInterface {
    * @param string $url
    *   The direct URL to the article.
    */
-  public function __construct(string $content, string $description, ?string $imageUrl, string $publishedAt, ?string $source, string $title, string $url) {
+  public function __construct(?string $content, string $description, ?string $imageUrl, string $publishedAt, ?string $source, string $title, string $url) {
     $this->content = $content;
     $this->description = $description;
     $this->imageUrl = $imageUrl;
@@ -86,10 +86,10 @@ class Article implements ArticleInterface {
   /**
    * Gets the content of the article.
    *
-   * @return string
+   * @return string|null
    *   The content of the article.
    */
-  public function getContent(): string {
+  public function getContent(): ?string {
     return $this->content;
   }
 

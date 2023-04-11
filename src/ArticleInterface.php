@@ -10,10 +10,10 @@ interface ArticleInterface {
   /**
    * Gets the content of the article.
    *
-   * @return string
+   * @return string|null
    *   The content of the article.
    */
-  public function getContent(): string;
+  public function getContent(): ?string;
 
   /**
    * Gets the description of the article.
