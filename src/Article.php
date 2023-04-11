@@ -84,70 +84,49 @@ class Article implements ArticleInterface {
   }
 
   /**
-   * Gets the content of the article.
-   *
-   * @return string|null
-   *   The content of the article.
+   * {@inheritdoc}
    */
   public function getContent(): ?string {
     return $this->content;
   }
 
   /**
-   * Gets the description of the article.
-   *
-   * @return string
-   *   The description of the article.
+   * {@inheritdoc}
    */
   public function getDescription(): string {
     return $this->description;
   }
 
   /**
-   * Gets the URL to a relevant image for the article.
-   *
-   * @return string|null
-   *   The URL to a relevant image for the article.
+   * {@inheritdoc}
    */
   public function getImageUrl(): ?string {
     return $this->imageUrl;
   }
 
   /**
-   * Gets the published date of the article.
-   *
-   * @return string
-   *   The published date of the article.
+   * {@inheritdoc}
    */
   public function getPublishedAt(): string {
     return $this->publishedAt;
   }
 
   /**
-   * Gets the name of the source of this article came from.
-   *
-   * @return string|null
-   *   The name of the source of this article came from.
+   * {@inheritdoc}
    */
   public function getSource(): ?string {
     return $this->source;
   }
 
   /**
-   * Gets the title of the article.
-   *
-   * @return string
-   *   The title of the article.
+   * {@inheritdoc}
    */
   public function getTitle(): string {
     return $this->title;
   }
 
   /**
-   * Gets the direct URL to the article.
-   *
-   * @return string
-   *   The direct URL to the article.
+   * {@inheritdoc}
    */
   public function getUrl(): string {
     return $this->url;
