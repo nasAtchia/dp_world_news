@@ -6,15 +6,15 @@ use Drupal\Core\Block\BlockBase;
 use Drupal\dp_world_news\Article;
 
 /**
- * Provides a 'Latest world news' block.
+ * Provides a 'Latest news from country' block.
  *
  * @Block(
- *   id = "dp_latest_world_news",
- *   admin_label = @Translation("Latest world news"),
+ *   id = "dp_latest_news_from_country",
+ *   admin_label = @Translation("Latest news from country"),
  *   category = @Translation("World News")
  * )
  */
-class LatestWorldNewsBlock extends BlockBase {
+class LatestNewsFromCountryBlock extends BlockBase {
 
   /**
    * {@inheritdoc}
