@@ -3,7 +3,9 @@
 namespace Drupal\dp_world_news\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-use Drupal\dp_world_news\Article;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\dp_world_news\NewsProviderFactoryInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a 'Latest news from country' block.
@@ -14,35 +16,56 @@ use Drupal\dp_world_news\Article;
  *   category = @Translation("World News")
  * )
  */
-class LatestNewsFromCountryBlock extends BlockBase {
+class LatestNewsFromCountryBlock extends BlockBase implements ContainerFactoryPluginInterface {
+  /**
+   * The news provider factory instance.
+   *
+   * @var \Drupal\dp_world_news\NewsProviderFactoryInterface
+   */
+  protected $newsProviderFactory;
+
+  /**
+   * LatestNewsFromCountryBlock constructor.
+   *
+   * @param array $configuration
+   *   A configuration array containing information about the plugin instance.
+   * @param string $plugin_id
+   *   The plugin_id for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   * @param \Drupal\dp_world_news\NewsProviderFactoryInterface $newsProviderFactory
+   *   The news provider factory instance.
+   */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, NewsProviderFactoryInterface $newsProviderFactory) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+
+    $this->newsProviderFactory = $newsProviderFactory;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('dp_world_news.provider.factory')
+    );
+  }
 
   /**
    * {@inheritdoc}
    */
   public function build() {
+    $parameters = [
+      'country' => 'us',
+    ];
+    $articles = $this->newsProviderFactory->getProvider('news_api')->getArticles($parameters);
     $build = [];
 
     $build['articles'] = [
-      '#markup' => [
-        new Article(
-          'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.',
-          'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa',
-          'https://dummyimage.com/600x400/000/fff',
-          '2023-01-01T00:00:00Z',
-          'Example.com',
-          'Article 1',
-          'https://example.com/',
-        ),
-        new Article(
-          'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.',
-          'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa',
-          'https://dummyimage.com/600x400/000/fff',
-          '2023-01-01T00:00:00Z',
-          'Example.com',
-          'Article 2',
-          'https://example.com/',
-        ),
-      ],
+      '#markup' => $articles,
     ];
 
     return $build;

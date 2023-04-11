@@ -1,0 +1,4 @@
+services:
+  dp_world_news.provider.factory:
+    class: Drupal\dp_world_news\NewsProviderFactory
+    arguments: ['@config.factory', '@http_client']
