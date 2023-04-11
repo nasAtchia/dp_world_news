@@ -8,12 +8,12 @@ use Drupal\Core\Block\BlockBase;
  * Provides a 'Latest world news' block.
  *
  * @Block(
- *   id = "dp_world_news",
- *   admin_label = @Translation("World News"),
+ *   id = "dp_latest_world_news",
+ *   admin_label = @Translation("Latest world news"),
  *   category = @Translation("World News")
  * )
  */
-class WorldNewsBlock extends BlockBase {
+class LatestWorldNewsBlock extends BlockBase {
 
   /**
    * {@inheritdoc}
