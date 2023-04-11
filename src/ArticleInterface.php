@@ -16,10 +16,10 @@ interface ArticleInterface {
   public function getContent(): string;
 
   /**
-   * Gets the small description of the article.
+   * Gets the description of the article.
    *
    * @return string
-   *   The small description of the article.
+   *   The description of the article.
    */
   public function getDescription(): string;
 

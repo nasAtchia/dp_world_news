@@ -61,7 +61,7 @@ class Article implements ArticleInterface {
    * @param string $content
    *   The content of the article.
    * @param string $description
-   *   The small description of the article.
+   *   The description of the article.
    * @param string|null $imageUrl
    *   The URL to a relevant image for the article.
    * @param string $publishedAt
@@ -94,10 +94,10 @@ class Article implements ArticleInterface {
   }
 
   /**
-   * Gets the small description of the article.
+   * Gets the description of the article.
    *
    * @return string
-   *   The small description of the article.
+   *   The description of the article.
    */
   public function getDescription(): string {
     return $this->description;
