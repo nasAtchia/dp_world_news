@@ -46,7 +46,7 @@ class NewsProviderFactory implements NewsProviderFactoryInterface {
    */
   public function getProvider($providerKey): NewsProviderInterface {
     if ($providerKey === 'news_api') {
-      return new NewsAPIProvider('d3f7801657d942c7a2748f68ebe54f3c', $this->httpClient);
+      return new NewsAPIProvider($this->httpClient, 'd3f7801657d942c7a2748f68ebe54f3c');
     }
     else {
       throw new NewsProviderNotFoundException($this->t('The @provider provider cannot be found.', [

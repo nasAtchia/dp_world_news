@@ -32,14 +32,14 @@ abstract class AbstractNewsProvider {
   /**
    * AbstractNewsProvider constructor.
    *
-   * @param string $apiKey
-   *   The news provider API key.
    * @param \GuzzleHttp\Client $httpClient
    *   The HTTP Client instance.
+   * @param string $apiKey
+   *   The news provider API key.
    */
-  public function __construct(string $apiKey, Client $httpClient) {
-    $this->apiKey = $apiKey;
+  public function __construct(Client $httpClient, string $apiKey) {
     $this->httpClient = $httpClient;
+    $this->apiKey = $apiKey;
   }
 
   /**
