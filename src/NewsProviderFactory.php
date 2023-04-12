@@ -4,6 +4,7 @@ namespace Drupal\dp_world_news;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\dp_world_news\Exception\NewsProviderNotFoundException;
 use GuzzleHttp\Client;
 
@@ -77,10 +78,10 @@ class NewsProviderFactory implements NewsProviderFactoryInterface {
    * @param string $providerKey
    *   The news provider key.
    *
-   * @return string
-   *   The error message.
+   * @return \Drupal\Core\StringTranslation\TranslatableMarkup
+   *   The translated error message.
    */
-  private function getNewsProviderNotFoundErrorMessage(string $providerKey): string {
+  private function getNewsProviderNotFoundErrorMessage(string $providerKey): TranslatableMarkup {
     return $this->t('The @provider provider cannot be found.', [
       '@provider' => $providerKey,
     ]);
