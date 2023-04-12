@@ -6,7 +6,7 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\dp_world_news\Exception\NewsProviderNotFoundException;
-use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 
 /**
  * Defines the class for the news provider object factory.
@@ -35,7 +35,7 @@ class NewsProviderFactory implements NewsProviderFactoryInterface {
   /**
    * The HTTP Client instance.
    *
-   * @var \GuzzleHttp\Client
+   * @var \GuzzleHttp\ClientInterface
    */
   protected $httpClient;
 
@@ -44,10 +44,10 @@ class NewsProviderFactory implements NewsProviderFactoryInterface {
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   The factory for configuration objects.
-   * @param \GuzzleHttp\Client $httpClient
+   * @param \GuzzleHttp\ClientInterface $httpClient
    *   The HTTP Client instance.
    */
-  public function __construct(ConfigFactoryInterface $configFactory, Client $httpClient) {
+  public function __construct(ConfigFactoryInterface $configFactory, ClientInterface $httpClient) {
     $this->configFactory = $configFactory;
     $this->httpClient = $httpClient;
   }

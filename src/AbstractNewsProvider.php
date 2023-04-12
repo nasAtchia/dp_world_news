@@ -2,7 +2,7 @@
 
 namespace Drupal\dp_world_news;
 
-use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 
 /**
  * Defines the abstract class for a news provider object.
@@ -25,19 +25,19 @@ abstract class AbstractNewsProvider {
   /**
    * The HTTP Client instance.
    *
-   * @var \GuzzleHttp\Client
+   * @var \GuzzleHttp\ClientInterface
    */
   protected $httpClient;
 
   /**
    * AbstractNewsProvider constructor.
    *
-   * @param \GuzzleHttp\Client $httpClient
+   * @param \GuzzleHttp\ClientInterface $httpClient
    *   The HTTP Client instance.
    * @param string $apiKey
    *   The news provider API key.
    */
-  public function __construct(Client $httpClient, string $apiKey) {
+  public function __construct(ClientInterface $httpClient, string $apiKey) {
     $this->httpClient = $httpClient;
     $this->apiKey = $apiKey;
   }

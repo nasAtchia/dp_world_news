@@ -25,7 +25,7 @@ class NewsProviderFactoryTest extends UnitTestCase {
   /**
    * The HTTP client mock.
    *
-   * @var \GuzzleHttp\Client|\PHPUnit\Framework\MockObject\MockObject
+   * @var \GuzzleHttp\ClientInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   private $httpClient;
 
@@ -36,7 +36,7 @@ class NewsProviderFactoryTest extends UnitTestCase {
     parent::setUp();
 
     $this->configFactory = $this->createMock('Drupal\Core\Config\ConfigFactoryInterface');
-    $this->httpClient = $this->createMock('GuzzleHttp\Client');
+    $this->httpClient = $this->createMock('GuzzleHttp\ClientInterface');
   }
 
   /**
