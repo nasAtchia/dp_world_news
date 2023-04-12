@@ -45,12 +45,12 @@ class NewsAPIProvider extends AbstractNewsProvider implements NewsProviderInterf
     return $this->articles = array_map(function ($article) {
       return new Article(
         $article->content ?? NULL,
-        $article->description,
+        $article->description ?? NULL,
         $article->urlToImage ?? NULL,
-        $article->publishedAt,
+        $article->publishedAt ?? NULL,
         $article->source ? $article->source->name : NULL,
-        $article->title,
-        $article->url,
+        $article->title ?? NULL,
+        $article->url ?? NULL,
       );
     }, $articles);
   }
