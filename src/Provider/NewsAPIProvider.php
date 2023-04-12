@@ -18,7 +18,7 @@ class NewsAPIProvider extends AbstractNewsProvider implements NewsProviderInterf
   public function getArticles(array $parameters): array {
     $parameters['apiKey'] = $this->apiKey;
 
-    $response = $this->httpClient->get($this->getApiBaseUrl(), [
+    $response = $this->httpClient->get($this->getApiBaseUrl() . '/top-headlines', [
       RequestOptions::QUERY => $parameters,
     ]);
 
@@ -35,7 +35,7 @@ class NewsAPIProvider extends AbstractNewsProvider implements NewsProviderInterf
    * {@inheritdoc}
    */
   protected function getApiBaseUrl(): string {
-    return 'https://newsapi.org/v2/top-headlines';
+    return 'https://newsapi.org/v2';
   }
 
   /**
