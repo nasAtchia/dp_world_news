@@ -4,6 +4,7 @@ namespace Drupal\dp_world_news;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\dp_world_news\Exception\NewsProviderNotFoundException;
 use Drupal\dp_world_news\Provider\NewsAPIProvider;
 use GuzzleHttp\Client;
 
@@ -44,7 +45,7 @@ class NewsProviderFactory implements NewsProviderFactoryInterface {
   /**
    * {@inheritdoc}
    */
-  public function getProvider($providerKey): NewsProviderInterface {
+  public function provider($providerKey): NewsProviderInterface {
     if ($providerKey === 'news_api') {
       return new NewsAPIProvider($this->httpClient, 'd3f7801657d942c7a2748f68ebe54f3c');
     }

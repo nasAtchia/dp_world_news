@@ -2,6 +2,8 @@
 
 namespace Drupal\dp_world_news;
 
+use Drupal\dp_world_news\Exception\NewsProviderNotFoundException;
+
 /**
  * Defines the interface for a news provider factory object.
  */
@@ -19,6 +21,6 @@ interface NewsProviderFactoryInterface {
    * @throws NewsProviderNotFoundException
    *   Thrown when a news provider cannot be found.
    */
-  public function getProvider(string $providerKey): NewsProviderInterface;
+  public function provider(string $providerKey): NewsProviderInterface;
 
 }

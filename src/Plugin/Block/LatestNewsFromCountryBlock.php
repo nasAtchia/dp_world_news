@@ -61,7 +61,7 @@ class LatestNewsFromCountryBlock extends BlockBase implements ContainerFactoryPl
     $parameters = [
       'country' => 'us',
     ];
-    $articles = $this->newsProviderFactory->getProvider('news_api')->getArticles($parameters);
+    $articles = $this->newsProviderFactory->provider('news_api')->getArticles($parameters);
     $build = [];
 
     $build['articles'] = [
