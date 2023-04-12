@@ -10,7 +10,7 @@ use GuzzleHttp\RequestOptions;
 /**
  * Defines the class for the News API provider.
  */
-class NewsAPIProvider extends AbstractNewsProvider implements NewsProviderInterface {
+class NewsApiProvider extends AbstractNewsProvider implements NewsProviderInterface {
 
   /**
    * {@inheritdoc}

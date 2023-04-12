@@ -20,7 +20,7 @@ class NewsProviderFactory implements NewsProviderFactoryInterface {
    * @var array
    */
   public const PROVIDERS = [
-    'news_api' => 'NewsAPI',
+    'news_api' => 'NewsApi',
     'news_data' => 'NewsData',
   ];
 
