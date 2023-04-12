@@ -16,7 +16,7 @@ class Article implements ArticleInterface {
   /**
    * The description of the article.
    *
-   * @var string
+   * @var string|null
    */
   public $description;
 
@@ -30,7 +30,7 @@ class Article implements ArticleInterface {
   /**
    * The published date of the article.
    *
-   * @var string
+   * @var string|null
    */
   public $publishedAt;
 
@@ -44,14 +44,14 @@ class Article implements ArticleInterface {
   /**
    * The title of the article.
    *
-   * @var string
+   * @var string|null
    */
   public $title;
 
   /**
    * The direct URL to the article.
    *
-   * @var string
+   * @var string|null
    */
   public $url;
 
@@ -60,20 +60,20 @@ class Article implements ArticleInterface {
    *
    * @param string|null $content
    *   The content of the article.
-   * @param string $description
+   * @param string|null $description
    *   The description of the article.
    * @param string|null $imageUrl
    *   The URL to a relevant image for the article.
-   * @param string $publishedAt
+   * @param string|null $publishedAt
    *   The published date of the article.
    * @param string|null $source
    *   The name of the source of this article came from.
-   * @param string $title
+   * @param string|null $title
    *   The title of the article.
-   * @param string $url
+   * @param string|null $url
    *   The direct URL to the article.
    */
-  public function __construct(?string $content, string $description, ?string $imageUrl, string $publishedAt, ?string $source, string $title, string $url) {
+  public function __construct(?string $content, ?string $description, ?string $imageUrl, ?string $publishedAt, ?string $source, ?string $title, ?string $url) {
     $this->content = $content;
     $this->description = $description;
     $this->imageUrl = $imageUrl;

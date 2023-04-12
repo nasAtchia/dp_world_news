@@ -18,10 +18,10 @@ interface ArticleInterface {
   /**
    * Gets the description of the article.
    *
-   * @return string
+   * @return string|null
    *   The description of the article.
    */
-  public function getDescription(): string;
+  public function getDescription(): ?string;
 
   /**
    * Gets the URL to a relevant image for the article.
@@ -34,10 +34,10 @@ interface ArticleInterface {
   /**
    * Gets the published date of the article.
    *
-   * @return string
+   * @return string|null
    *   The published date of the article.
    */
-  public function getPublishedAt(): string;
+  public function getPublishedAt(): ?string;
 
   /**
    * Gets the name of the source of this article came from.
@@ -50,17 +50,17 @@ interface ArticleInterface {
   /**
    * Gets the title of the article.
    *
-   * @return string
+   * @return string|null
    *   The title of the article.
    */
-  public function getTitle(): string;
+  public function getTitle(): ?string;
 
   /**
    * Gets the direct URL to the article.
    *
-   * @return string
+   * @return string|null
    *   The direct URL to the article.
    */
-  public function getUrl(): string;
+  public function getUrl(): ?string;
 
 }
