@@ -15,6 +15,9 @@ interface NewsProviderInterface {
    *
    * @return array
    *   List of articles.
+   *
+   * @throws \GuzzleHttp\Exception\GuzzleException
+   *   Thrown when there is a failure in making an API call to the provider.
    */
   public function getArticles(array $parameters): array;
 

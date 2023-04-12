@@ -3,7 +3,9 @@
 namespace Drupal\dp_world_news\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\dp_world_news\DpWorldNews;
 use Drupal\dp_world_news\NewsProviderFactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -17,6 +19,13 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * )
  */
 class LatestNewsFromCountryBlock extends BlockBase implements ContainerFactoryPluginInterface {
+  /**
+   * The logger factory instance.
+   *
+   * @var \Drupal\Core\Logger\LoggerChannelFactoryInterface
+   */
+  protected $loggerFactory;
+
   /**
    * The news provider factory instance.
    *
@@ -33,12 +42,15 @@ class LatestNewsFromCountryBlock extends BlockBase implements ContainerFactoryPl
    *   The plugin_id for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
+   * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $loggerFactory
+   *   The logger factory.
    * @param \Drupal\dp_world_news\NewsProviderFactoryInterface $newsProviderFactory
    *   The news provider factory instance.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, NewsProviderFactoryInterface $newsProviderFactory) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, LoggerChannelFactoryInterface $loggerFactory, NewsProviderFactoryInterface $newsProviderFactory) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 
+    $this->loggerFactory = $loggerFactory->get(DpWorldNews::MODULE_NAME);
     $this->newsProviderFactory = $newsProviderFactory;
   }
 
@@ -50,6 +62,7 @@ class LatestNewsFromCountryBlock extends BlockBase implements ContainerFactoryPl
       $configuration,
       $plugin_id,
       $plugin_definition,
+      $container->get('logger.factory'),
       $container->get('dp_world_news.provider.factory')
     );
   }
@@ -58,15 +71,22 @@ class LatestNewsFromCountryBlock extends BlockBase implements ContainerFactoryPl
    * {@inheritdoc}
    */
   public function build() {
+    $build = [];
+
     $parameters = [
       'country' => 'us',
     ];
-    $articles = $this->newsProviderFactory->provider('news_api')->getArticles($parameters);
-    $build = [];
 
-    $build['articles'] = [
-      '#markup' => $articles,
-    ];
+    try {
+      $articles = $this->newsProviderFactory->provider('news_api')->getArticles($parameters);
+
+      $build['articles'] = [
+        '#markup' => $articles,
+      ];
+    }
+    catch (\Exception $e) {
+      $this->loggerFactory->error($e->getMessage());
+    }
 
     return $build;
   }
