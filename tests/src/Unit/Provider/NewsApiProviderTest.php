@@ -43,6 +43,7 @@ class NewsApiProviderTest extends UnitTestCase {
         [
           'title' => 'Test article 1',
           'description' => 'Test article 1 description.',
+          'content' => 'Test article 1 content.',
           'url' => 'https://example.com/test-article-1',
           'urlToImage' => 'https://example.com/test-article-1-image.jpg',
           'publishedAt' => '2023-01-01T12:00:00Z',
@@ -53,6 +54,7 @@ class NewsApiProviderTest extends UnitTestCase {
         [
           'title' => 'Test article 2',
           'description' => 'Test article 2 description.',
+          'content' => null,
           'url' => 'https://example.com/test-article-2',
           'urlToImage' => 'https://example.com/test-article-2-image.jpg',
           'publishedAt' => '2023-01-01T12:00:00Z',
@@ -86,6 +88,7 @@ class NewsApiProviderTest extends UnitTestCase {
     $this->assertInstanceOf(Article::class, $articles[0]);
     $this->assertEquals('Test article 1', $articles[0]->getTitle());
     $this->assertEquals('Test article 1 description.', $articles[0]->getDescription());
+    $this->assertEquals('Test article 1 content.', $articles[0]->getContent());
     $this->assertEquals('https://example.com/test-article-1', $articles[0]->getUrl());
     $this->assertEquals('https://example.com/test-article-1-image.jpg', $articles[0]->getImageUrl());
     $this->assertEquals('Example News', $articles[0]->getSource());
@@ -94,6 +97,7 @@ class NewsApiProviderTest extends UnitTestCase {
     $this->assertInstanceOf(Article::class, $articles[1]);
     $this->assertEquals('Test article 2', $articles[1]->getTitle());
     $this->assertEquals('Test article 2 description.', $articles[1]->getDescription());
+    $this->assertEquals(NULL, $articles[1]->getContent());
     $this->assertEquals('https://example.com/test-article-2', $articles[1]->getUrl());
     $this->assertEquals('https://example.com/test-article-2-image.jpg', $articles[1]->getImageUrl());
     $this->assertEquals('Example News', $articles[1]->getSource());
