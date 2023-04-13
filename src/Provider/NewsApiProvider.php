@@ -18,7 +18,7 @@ class NewsApiProvider extends AbstractNewsProvider implements NewsProviderInterf
   public function getArticles(array $parameters): array {
     $parameters['apiKey'] = $this->apiKey;
 
-    $response = $this->httpClient->get($this->getApiBaseUrl() . '/top-headlines', [
+    $response = $this->httpClient->request('GET', $this->getApiBaseUrl() . '/top-headlines', [
       RequestOptions::QUERY => $parameters,
     ]);
 
