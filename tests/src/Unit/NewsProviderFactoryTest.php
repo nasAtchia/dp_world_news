@@ -42,6 +42,8 @@ class NewsProviderFactoryTest extends UnitTestCase {
   /**
    * Tests the provider method with a valid provider key.
    *
+   * @covers ::provider
+   *
    * @dataProvider providerTestCases
    */
   public function testProviderWithValidProviderKey($providerKey, $expectedProviderClassName): void {
@@ -67,6 +69,9 @@ class NewsProviderFactoryTest extends UnitTestCase {
 
   /**
    * Tests the provider method with an invalid provider key.
+   *
+   * @covers ::provider
+   *
    */
   public function testProviderWithInvalidProviderKey(): void {
     $this->expectException(NewsProviderNotFoundException::class);
