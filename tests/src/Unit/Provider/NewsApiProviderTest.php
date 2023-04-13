@@ -56,7 +56,7 @@ class NewsApiProviderTest extends UnitTestCase {
           'description' => 'Test article 2 description.',
           'content' => null,
           'url' => 'https://example.com/test-article-2',
-          'urlToImage' => 'https://example.com/test-article-2-image.jpg',
+          'urlToImage' => null,
           'publishedAt' => '2023-01-01T12:00:00Z',
           'source' => [
             'name' => 'Example News',
@@ -99,7 +99,7 @@ class NewsApiProviderTest extends UnitTestCase {
     $this->assertEquals('Test article 2 description.', $articles[1]->getDescription());
     $this->assertEquals(NULL, $articles[1]->getContent());
     $this->assertEquals('https://example.com/test-article-2', $articles[1]->getUrl());
-    $this->assertEquals('https://example.com/test-article-2-image.jpg', $articles[1]->getImageUrl());
+    $this->assertEquals(NULL, $articles[1]->getImageUrl());
     $this->assertEquals('Example News', $articles[1]->getSource());
     $this->assertEquals('2023-01-01T12:00:00Z', $articles[1]->getPublishedAt());
   }
