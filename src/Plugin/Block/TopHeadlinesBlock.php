@@ -3,11 +3,11 @@
 namespace Drupal\dp_world_news\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\dp_world_news\NewsProviderFactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Provides a 'Top headlines' block.
@@ -19,6 +19,14 @@ use Symfony\Component\HttpFoundation\RequestStack;
  * )
  */
 class TopHeadlinesBlock extends BlockBase implements ContainerFactoryPluginInterface {
+
+  /**
+   * The language manager instance.
+   *
+   * @var \Drupal\Core\Language\LanguageManagerInterface
+   */
+  protected $languageManager;
+
   /**
    * The logger factory instance.
    *
@@ -34,13 +42,6 @@ class TopHeadlinesBlock extends BlockBase implements ContainerFactoryPluginInter
   protected $newsProviderFactory;
 
   /**
-   * The request stack instance.
-   *
-   * @var \Symfony\Component\HttpFoundation\RequestStack
-   */
-  protected $requestStack;
-
-  /**
    * TopHeadlinesBlock constructor.
    *
    * @param array $configuration
@@ -49,19 +50,19 @@ class TopHeadlinesBlock extends BlockBase implements ContainerFactoryPluginInter
    *   The plugin_id for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
+   * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
+   *   The language manager instance.
    * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $loggerFactory
-   *   The logger factory.
+   *   The logger factory instance.
    * @param \Drupal\dp_world_news\NewsProviderFactoryInterface $newsProviderFactory
    *   The news provider factory instance.
-   * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
-   *   The request stack instance.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, LoggerChannelFactoryInterface $loggerFactory, NewsProviderFactoryInterface $newsProviderFactory, RequestStack $requestStack) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, LanguageManagerInterface $languageManager, LoggerChannelFactoryInterface $loggerFactory, NewsProviderFactoryInterface $newsProviderFactory) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 
+    $this->languageManager = $languageManager;
     $this->loggerFactory = $loggerFactory->get('dp_world_news');
     $this->newsProviderFactory = $newsProviderFactory;
-    $this->requestStack = $requestStack;
   }
 
   /**
@@ -72,20 +73,20 @@ class TopHeadlinesBlock extends BlockBase implements ContainerFactoryPluginInter
       $configuration,
       $plugin_id,
       $plugin_definition,
+      $container->get('language_manager'),
       $container->get('logger.factory'),
       $container->get('dp_world_news.provider.factory'),
-      $container->get('request_stack')
     );
   }
 
   /**
    * {@inheritdoc}
    */
-  public function build() {
+  public function build(): array {
     $build = [];
 
     $parameters = [
-      'language' => $this->requestStack->getCurrentRequest()->getLocale(),
+      'language' => $this->languageManager->getCurrentLanguage()->getId(),
     ];
 
     try {
