@@ -63,7 +63,6 @@ class NewsDataProviderTest extends UnitTestCase {
 
     $parameters = [
       'apikey' => 'api_key',
-      'country' => 'us',
     ];
 
     $this->httpClient->expects($this->once())
