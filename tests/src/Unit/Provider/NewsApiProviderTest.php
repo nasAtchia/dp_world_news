@@ -54,9 +54,9 @@ class NewsApiProviderTest extends UnitTestCase {
         [
           'title' => 'Test article 2',
           'description' => 'Test article 2 description.',
-          'content' => null,
+          'content' => NULL,
           'url' => 'https://example.com/test-article-2',
-          'urlToImage' => null,
+          'urlToImage' => NULL,
           'publishedAt' => '2023-01-01T12:00:00Z',
           'source' => [
             'name' => 'Example News',
@@ -72,7 +72,7 @@ class NewsApiProviderTest extends UnitTestCase {
 
     $this->httpClient->expects($this->once())
       ->method('request')
-      ->with( 'GET', 'https://newsapi.org/v2/top-headlines',
+      ->with('GET', 'https://newsapi.org/v2/top-headlines',
         [
           'query' => $parameters,
         ]

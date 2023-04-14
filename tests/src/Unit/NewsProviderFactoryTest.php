@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\dp_world_news\Unit;
 
-use Drupal\dp_world_news\Exception\NewsProviderNotFoundException;
 use Drupal\dp_world_news\NewsProviderFactory;
 use Drupal\Tests\UnitTestCase;
 
@@ -71,10 +70,9 @@ class NewsProviderFactoryTest extends UnitTestCase {
    * Tests the provider method with an invalid provider key.
    *
    * @covers ::provider
-   *
    */
   public function testProviderWithInvalidProviderKey(): void {
-    $this->expectException(NewsProviderNotFoundException::class);
+    $this->expectException(\InvalidArgumentException::class);
     $this->expectExceptionMessage('The invalid_provider provider cannot be found.');
 
     $factory = new NewsProviderFactory($this->configFactory, $this->httpClient);

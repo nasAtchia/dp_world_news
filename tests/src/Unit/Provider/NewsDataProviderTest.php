@@ -52,9 +52,9 @@ class NewsDataProviderTest extends UnitTestCase {
         [
           'title' => 'Test article 2',
           'description' => 'Test article 2 description.',
-          'content' => null,
+          'content' => NULL,
           'link' => 'https://example.com/test-article-2',
-          'image_url' => null,
+          'image_url' => NULL,
           'pubDate' => '2023-01-01T12:00:00Z',
           'source_id' => 'Example News',
         ],
@@ -68,7 +68,7 @@ class NewsDataProviderTest extends UnitTestCase {
 
     $this->httpClient->expects($this->once())
       ->method('request')
-      ->with( 'GET', 'https://newsdata.io/api/1/news',
+      ->with('GET', 'https://newsdata.io/api/1/news',
         [
           'query' => $parameters,
         ]

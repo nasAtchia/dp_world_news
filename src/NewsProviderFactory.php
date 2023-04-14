@@ -5,7 +5,6 @@ namespace Drupal\dp_world_news;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\dp_world_news\Exception\NewsProviderNotFoundException;
 use GuzzleHttp\ClientInterface;
 
 /**
@@ -59,14 +58,14 @@ class NewsProviderFactory implements NewsProviderFactoryInterface {
     $providerKeys = array_keys(self::PROVIDERS);
 
     if (!in_array($providerKey, $providerKeys)) {
-      throw new NewsProviderNotFoundException($this->getNewsProviderNotFoundErrorMessage($providerKey));
+      throw new \InvalidArgumentException($this->getNewsProviderNotFoundErrorMessage($providerKey));
     }
 
     $providerClass = self::PROVIDERS[$providerKey] . 'Provider';
     $providerClassPath = '\Drupal\dp_world_news\Provider\\' . $providerClass;
 
     if (!class_exists($providerClassPath)) {
-      throw new NewsProviderNotFoundException($this->getNewsProviderNotFoundErrorMessage($providerKey));
+      throw new \InvalidArgumentException($this->getNewsProviderNotFoundErrorMessage($providerKey));
     }
 
     return new $providerClassPath($this->httpClient, 'd3f7801657d942c7a2748f68ebe54f3c');

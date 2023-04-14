@@ -16,7 +16,7 @@ interface NewsProviderFactoryInterface {
    * @return NewsProviderInterface
    *   The news provider instance.
    *
-   * @throws \Drupal\dp_world_news\Exception\NewsProviderNotFoundException
+   * @throws \InvalidArgumentException
    *   Thrown when a news provider cannot be found.
    */
   public function provider(string $providerKey): NewsProviderInterface;
