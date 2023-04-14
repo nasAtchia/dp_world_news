@@ -5,7 +5,6 @@ namespace Drupal\dp_world_news\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\dp_world_news\DpWorldNews;
 use Drupal\dp_world_news\NewsProviderFactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -50,7 +49,7 @@ class LatestNewsFromCountryBlock extends BlockBase implements ContainerFactoryPl
   public function __construct(array $configuration, $plugin_id, $plugin_definition, LoggerChannelFactoryInterface $loggerFactory, NewsProviderFactoryInterface $newsProviderFactory) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 
-    $this->loggerFactory = $loggerFactory->get(DpWorldNews::MODULE_NAME);
+    $this->loggerFactory = $loggerFactory->get('dp_world_news');
     $this->newsProviderFactory = $newsProviderFactory;
   }
 

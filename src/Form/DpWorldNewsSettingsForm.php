@@ -4,7 +4,6 @@ namespace Drupal\dp_world_news\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\dp_world_news\DpWorldNews;
 
 /**
  * Configure world news module.
@@ -16,7 +15,7 @@ class DpWorldNewsSettingsForm extends ConfigFormBase {
    */
   protected function getEditableConfigNames(): array {
     return [
-      DpWorldNews::CONFIG_NAME,
+      'dp_world_news.settings',
     ];
   }
 
@@ -31,7 +30,7 @@ class DpWorldNewsSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state): array {
-    $config = $this->config(DpWorldNews::CONFIG_NAME);
+    $config = $this->config('dp_world_news.settings');
 
     $form['news_api'] = [
       '#markup' => $this->t('News API'),
@@ -62,7 +61,7 @@ class DpWorldNewsSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
-    $this->config(DpWorldNews::CONFIG_NAME)
+    $this->config('dp_world_news.settings')
       ->set('news_api.api_key', $form_state->getValue('news_api_api_key'))
       ->set('news_data.api_key', $form_state->getValue('news_data_api_key'))
       ->save();
