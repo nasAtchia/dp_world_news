@@ -18,6 +18,7 @@ interface NewsProviderFactoryInterface {
    *
    * @throws \InvalidArgumentException
    *   Thrown when a news provider cannot be found.
+   *   Thrown when an API key is missing for a news provider.
    */
   public function provider(string $providerKey): NewsProviderInterface;
 

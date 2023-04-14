@@ -68,7 +68,15 @@ class NewsProviderFactory implements NewsProviderFactoryInterface {
       throw new \InvalidArgumentException($this->getNewsProviderNotFoundErrorMessage($providerKey));
     }
 
-    return new $providerClassPath($this->httpClient, 'd3f7801657d942c7a2748f68ebe54f3c');
+    $providerApiKey = $this->getApiKeyForNewsProvider($providerKey);
+
+    if (!$providerApiKey) {
+      throw new \InvalidArgumentException($this->t('Missing API key for @provider.', [
+        '@provider' => $providerKey,
+      ]));
+    }
+
+    return new $providerClassPath($this->httpClient, $providerApiKey);
   }
 
   /**
@@ -84,6 +92,20 @@ class NewsProviderFactory implements NewsProviderFactoryInterface {
     return $this->t('The @provider provider cannot be found.', [
       '@provider' => $providerKey,
     ]);
+  }
+
+  /**
+   * Gets the API key for a news provider.
+   *
+   * @param string $providerKey
+   *   The news provider key.
+   *
+   * @return string|null
+   *   The API key.
+   */
+  private function getApiKeyForNewsProvider(string $providerKey): ?string {
+    $configKey = $providerKey . '.api_key';
+    return $this->configFactory->get('dp_world_news.settings')->get($configKey);
   }
 
 }
