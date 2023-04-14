@@ -7,17 +7,18 @@ use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\dp_world_news\NewsProviderFactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * Provides a 'Latest news from country' block.
+ * Provides a 'Top headlines' block.
  *
  * @Block(
- *   id = "dp_latest_news_from_country",
- *   admin_label = @Translation("Latest news from country"),
+ *   id = "dp_top_headlines",
+ *   admin_label = @Translation("Top headlines"),
  *   category = @Translation("World News")
  * )
  */
-class LatestNewsFromCountryBlock extends BlockBase implements ContainerFactoryPluginInterface {
+class TopHeadlinesBlock extends BlockBase implements ContainerFactoryPluginInterface {
   /**
    * The logger factory instance.
    *
@@ -33,7 +34,14 @@ class LatestNewsFromCountryBlock extends BlockBase implements ContainerFactoryPl
   protected $newsProviderFactory;
 
   /**
-   * LatestNewsFromCountryBlock constructor.
+   * The request stack instance.
+   *
+   * @var \Symfony\Component\HttpFoundation\RequestStack
+   */
+  protected $requestStack;
+
+  /**
+   * TopHeadlinesBlock constructor.
    *
    * @param array $configuration
    *   A configuration array containing information about the plugin instance.
@@ -45,12 +53,15 @@ class LatestNewsFromCountryBlock extends BlockBase implements ContainerFactoryPl
    *   The logger factory.
    * @param \Drupal\dp_world_news\NewsProviderFactoryInterface $newsProviderFactory
    *   The news provider factory instance.
+   * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
+   *   The request stack instance.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, LoggerChannelFactoryInterface $loggerFactory, NewsProviderFactoryInterface $newsProviderFactory) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, LoggerChannelFactoryInterface $loggerFactory, NewsProviderFactoryInterface $newsProviderFactory, RequestStack $requestStack) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 
     $this->loggerFactory = $loggerFactory->get('dp_world_news');
     $this->newsProviderFactory = $newsProviderFactory;
+    $this->requestStack = $requestStack;
   }
 
   /**
@@ -62,7 +73,8 @@ class LatestNewsFromCountryBlock extends BlockBase implements ContainerFactoryPl
       $plugin_id,
       $plugin_definition,
       $container->get('logger.factory'),
-      $container->get('dp_world_news.provider.factory')
+      $container->get('dp_world_news.provider.factory'),
+      $container->get('request_stack')
     );
   }
 
@@ -73,7 +85,7 @@ class LatestNewsFromCountryBlock extends BlockBase implements ContainerFactoryPl
     $build = [];
 
     $parameters = [
-      'country' => 'us',
+      'language' => $this->requestStack->getCurrentRequest()->getLocale(),
     ];
 
     try {
