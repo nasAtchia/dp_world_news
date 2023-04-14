@@ -15,6 +15,13 @@ use Drupal\Tests\UnitTestCase;
 class NewsProviderFactoryTest extends UnitTestCase {
 
   /**
+   * The config mock.
+   *
+   * @var \Drupal\Core\Config\Config|\PHPUnit\Framework\MockObject\MockObject
+   */
+  private $config;
+
+  /**
    * The config factory mock.
    *
    * @var \Drupal\Core\Config\ConfigFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
@@ -35,6 +42,7 @@ class NewsProviderFactoryTest extends UnitTestCase {
     parent::setUp();
 
     $this->configFactory = $this->createMock('Drupal\Core\Config\ConfigFactoryInterface');
+    $this->config = $this->createMock('Drupal\Core\Config\Config');
     $this->httpClient = $this->createMock('GuzzleHttp\ClientInterface');
   }
 
@@ -46,6 +54,16 @@ class NewsProviderFactoryTest extends UnitTestCase {
    * @dataProvider providerTestCases
    */
   public function testProviderWithValidProviderKey($providerKey, $expectedProviderClassName): void {
+    $this->config->expects($this->once())
+      ->method('get')
+      ->with($providerKey . '.api_key')
+      ->willReturn('api_key');
+
+    $this->configFactory->expects($this->once())
+      ->method('get')
+      ->with('dp_world_news.settings')
+      ->willReturn($this->config);
+
     $factory = new NewsProviderFactory($this->configFactory, $this->httpClient);
 
     $provider = $factory->provider($providerKey);
@@ -79,6 +97,31 @@ class NewsProviderFactoryTest extends UnitTestCase {
     $factory->setStringTranslation($this->getStringTranslationStub());
 
     $factory->provider('invalid_provider');
+  }
+
+  /**
+   * Tests the provider method with a missing API key.
+   *
+   * @covers ::provider
+   */
+  public function testProviderWithValidProviderKeyButMissingApiKey(): void {
+    $this->expectException(\InvalidArgumentException::class);
+    $this->expectExceptionMessage('Missing API key for news_api.');
+
+    $this->config->expects($this->once())
+      ->method('get')
+      ->with('news_api.api_key')
+      ->willReturn(NULL);
+
+    $this->configFactory->expects($this->once())
+      ->method('get')
+      ->with('dp_world_news.settings')
+      ->willReturn($this->config);
+
+    $factory = new NewsProviderFactory($this->configFactory, $this->httpClient);
+    $factory->setStringTranslation($this->getStringTranslationStub());
+
+    $factory->provider('news_api');
   }
 
 }
