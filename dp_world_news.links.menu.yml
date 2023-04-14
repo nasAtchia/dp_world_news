@@ -1,0 +1,5 @@
+dp_world_news.settings:
+  title: 'World News'
+  description: 'Configure the World News module.'
+  route_name: dp_world_news.settings
+  parent: system.admin_config_content

@@ -8,6 +8,13 @@ namespace Drupal\dp_world_news;
 class DpWorldNews {
 
   /**
+   * The config name.
+   *
+   * @var string
+   */
+  const CONFIG_NAME = 'dp_world_news.settings';
+
+  /**
    * The module name.
    *
    * @var string

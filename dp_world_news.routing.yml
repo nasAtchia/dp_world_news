@@ -1,0 +1,7 @@
+dp_world_news.settings:
+  path: '/admin/config/content/world-news'
+  defaults:
+    _form: '\Drupal\dp_world_news\Form\DpWorldNewsSettingsForm'
+    _title: 'World News settings'
+  requirements:
+    _permission: 'administer site configuration'
