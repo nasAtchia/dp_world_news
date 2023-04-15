@@ -25,7 +25,7 @@ class NewsProviderFactory implements NewsProviderFactoryInterface {
   ];
 
   /**
-   * The config factory.
+   * The config factory instance.
    *
    * @var \Drupal\Core\Config\ConfigFactoryInterface
    */
@@ -42,7 +42,7 @@ class NewsProviderFactory implements NewsProviderFactoryInterface {
    * NewsProviderFactory constructor.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
-   *   The factory for configuration objects.
+   *   The config factory instance.
    * @param \GuzzleHttp\ClientInterface $httpClient
    *   The HTTP Client instance.
    */

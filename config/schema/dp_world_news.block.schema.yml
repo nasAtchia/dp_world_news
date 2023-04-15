@@ -1,0 +1,7 @@
+block.settings.dp_top_headlines:
+  type: block_settings
+  label: 'Top headlines'
+  mapping:
+    news_provider:
+      type: string
+      label: 'Choose a News Provider'
