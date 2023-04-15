@@ -33,11 +33,11 @@ class NewsDataProviderTest extends UnitTestCase {
   }
 
   /**
-   * Test the getArticles() method.
+   * Test the getLatestNews() method.
    *
    * @covers ::getLatestNews
    */
-  public function testGetArticles() {
+  public function testgetLatestNews() {
     $response = new Response(200, [], json_encode([
       'results' => [
         [
