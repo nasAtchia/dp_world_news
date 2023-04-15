@@ -28,12 +28,10 @@ class DpWorldNewsSettingsFormTest extends BrowserTestBase {
    *
    * @var \Drupal\user\Entity\User
    */
-  private $user;
+  protected $user;
 
   /**
-   * Perform initial setup tasks that run before every test method.
-   *
-   * @throws \Drupal\Core\Entity\EntityStorageException
+   * {@inheritdoc}
    */
   public function setUp(): void {
     parent::setUp();
