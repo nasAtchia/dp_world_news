@@ -8,6 +8,7 @@ use GuzzleHttp\ClientInterface;
  * Defines the abstract class for a news provider object.
  */
 abstract class AbstractNewsProvider {
+
   /**
    * The news provider API key.
    *

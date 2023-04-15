@@ -49,8 +49,8 @@ class NewsApiProvider extends AbstractNewsProvider implements NewsProviderInterf
         $article->urlToImage ?? NULL,
         $article->publishedAt ?? NULL,
         $article->source ? $article->source->name : NULL,
-        $article->title ?? NULL,
-        $article->url ?? NULL,
+        $article->title,
+        $article->url,
       );
     }, $articles);
   }

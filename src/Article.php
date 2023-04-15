@@ -6,6 +6,7 @@ namespace Drupal\dp_world_news;
  * Defines the class for an article object.
  */
 class Article implements ArticleInterface {
+
   /**
    * The content of the article.
    *
@@ -44,14 +45,14 @@ class Article implements ArticleInterface {
   /**
    * The title of the article.
    *
-   * @var string|null
+   * @var string
    */
   public $title;
 
   /**
    * The direct URL to the article.
    *
-   * @var string|null
+   * @var string
    */
   public $url;
 
@@ -68,12 +69,12 @@ class Article implements ArticleInterface {
    *   The published date of the article.
    * @param string|null $source
    *   The name of the source of this article came from.
-   * @param string|null $title
+   * @param string $title
    *   The title of the article.
-   * @param string|null $url
+   * @param string $url
    *   The direct URL to the article.
    */
-  public function __construct(?string $content, ?string $description, ?string $imageUrl, ?string $publishedAt, ?string $source, ?string $title, ?string $url) {
+  public function __construct(?string $content, ?string $description, ?string $imageUrl, ?string $publishedAt, ?string $source, string $title, string $url) {
     $this->content = $content;
     $this->description = $description;
     $this->imageUrl = $imageUrl;
@@ -93,7 +94,7 @@ class Article implements ArticleInterface {
   /**
    * {@inheritdoc}
    */
-  public function getDescription(): string {
+  public function getDescription(): ?string {
     return $this->description;
   }
 
@@ -107,7 +108,7 @@ class Article implements ArticleInterface {
   /**
    * {@inheritdoc}
    */
-  public function getPublishedAt(): string {
+  public function getPublishedAt(): ?string {
     return $this->publishedAt;
   }
 

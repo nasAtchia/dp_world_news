@@ -50,17 +50,17 @@ interface ArticleInterface {
   /**
    * Gets the title of the article.
    *
-   * @return string|null
+   * @return string
    *   The title of the article.
    */
-  public function getTitle(): ?string;
+  public function getTitle(): string;
 
   /**
    * Gets the direct URL to the article.
    *
-   * @return string|null
+   * @return string
    *   The direct URL to the article.
    */
-  public function getUrl(): ?string;
+  public function getUrl(): string;
 
 }

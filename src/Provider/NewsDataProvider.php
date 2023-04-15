@@ -49,8 +49,8 @@ class NewsDataProvider extends AbstractNewsProvider implements NewsProviderInter
         $article->image_url ?? NULL,
         $article->pubDate ?? NULL,
         $article->source_id ?? NULL,
-        $article->title ?? NULL,
-        $article->link ?? NULL,
+        $article->title,
+        $article->link,
       );
     }, $articles);
   }
