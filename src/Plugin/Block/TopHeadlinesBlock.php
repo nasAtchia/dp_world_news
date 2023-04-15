@@ -174,6 +174,10 @@ class TopHeadlinesBlock extends BlockBase implements ContainerFactoryPluginInter
       $build['articles'] = [
         '#markup' => $articles,
       ];
+
+      $build['#cache'] = [
+        'max-age' => 3600,
+      ];
     }
     catch (\Exception $e) {
       $this->loggerFactory->error($e->getMessage());
