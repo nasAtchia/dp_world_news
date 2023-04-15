@@ -90,7 +90,7 @@ class TopHeadlinesBlock extends BlockBase implements ContainerFactoryPluginInter
     ];
 
     try {
-      $articles = $this->newsProviderFactory->provider('news_api')->getArticles($parameters);
+      $articles = $this->newsProviderFactory->provider('news_api')->getLatestNews($parameters);
 
       $build['articles'] = [
         '#markup' => $articles,

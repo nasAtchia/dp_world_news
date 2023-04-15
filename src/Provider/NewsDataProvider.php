@@ -15,7 +15,7 @@ class NewsDataProvider extends AbstractNewsProvider implements NewsProviderInter
   /**
    * {@inheritdoc}
    */
-  public function getArticles(array $parameters): array {
+  public function getLatestNews(array $parameters): array {
     $parameters['apikey'] = $this->apiKey;
 
     $response = $this->httpClient->request('GET', $this->getApiBaseUrl() . '/news', [

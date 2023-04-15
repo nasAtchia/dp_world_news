@@ -8,7 +8,7 @@ namespace Drupal\dp_world_news;
 interface NewsProviderInterface {
 
   /**
-   * Fetches the list of articles.
+   * Fetches the latest news.
    *
    * @param array $parameters
    *   API parameter list.
@@ -19,6 +19,6 @@ interface NewsProviderInterface {
    * @throws \GuzzleHttp\Exception\GuzzleException
    *   Thrown when there is a failure in making an API call to the provider.
    */
-  public function getArticles(array $parameters): array;
+  public function getLatestNews(array $parameters): array;
 
 }

@@ -35,7 +35,7 @@ class NewsApiProviderTest extends UnitTestCase {
   /**
    * Test the getArticles() method.
    *
-   * @covers ::getArticles
+   * @covers ::getLatestNews
    */
   public function testGetArticles() {
     $response = new Response(200, [], json_encode([
@@ -79,7 +79,7 @@ class NewsApiProviderTest extends UnitTestCase {
       ->willReturn($response);
 
     $provider = new NewsApiProvider($this->httpClient, 'api_key');
-    $articles = $provider->getArticles($parameters);
+    $articles = $provider->getLatestNews($parameters);
 
     $this->assertIsArray($articles);
     $this->assertCount(2, $articles);
