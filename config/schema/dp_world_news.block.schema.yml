@@ -2,6 +2,9 @@ block.settings.dp_top_headlines:
   type: block_settings
   label: 'Top headlines'
   mapping:
+    cache_max_age:
+      type: string
+      label: 'Cache Max Age'
     news_provider:
       type: string
       label: 'Choose a News Provider'

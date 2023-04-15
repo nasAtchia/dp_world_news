@@ -109,6 +109,7 @@ class TopHeadlinesBlock extends BlockBase implements ContainerFactoryPluginInter
    */
   public function defaultConfiguration(): array {
     return [
+      'cache_max_age' => 3600,
       'news_provider' => 'news_api',
     ];
   }
@@ -117,6 +118,13 @@ class TopHeadlinesBlock extends BlockBase implements ContainerFactoryPluginInter
    * {@inheritdoc}
    */
   public function blockForm($form, FormStateInterface $form_state) {
+    $form['cache_max_age'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Cache Max Age'),
+      '#description' => $this->t('The maximum amount of time to put the block in cache in seconds.'),
+      '#default_value' => $this->configuration['cache_max_age'],
+    ];
+
     $form['news_provider'] = [
       '#type' => 'select',
       '#title' => $this->t('Choose a News Provider'),
@@ -137,6 +145,7 @@ class TopHeadlinesBlock extends BlockBase implements ContainerFactoryPluginInter
   public function blockSubmit($form, FormStateInterface $form_state): void {
     $values = $form_state->getValues();
     $this->configuration['news_provider'] = $values['news_provider'];
+    $this->configuration['cache_max_age'] = $values['cache_max_age'];
   }
 
   /**
@@ -174,16 +183,21 @@ class TopHeadlinesBlock extends BlockBase implements ContainerFactoryPluginInter
       $build['articles'] = [
         '#markup' => $articles,
       ];
-
-      $build['#cache'] = [
-        'max-age' => 3600,
-      ];
     }
     catch (\Exception $e) {
       $this->loggerFactory->error($e->getMessage());
     }
 
     return $build;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheMaxAge(): int {
+    $config = $this->getConfiguration();
+
+    return $config['cache_max_age'];
   }
 
 }
