@@ -51,3 +51,5 @@ See the API documentation for each provider for more information on request para
 ## Top Headlines Block
 
 You can utilize the Top Headlines block to showcase a preview of the most recent global news.
+
+For guidance on implementing this block, refer to the following repository: https://github.com/nasAtchia/clean-blog-drupal.
