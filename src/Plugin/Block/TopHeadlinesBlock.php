@@ -171,7 +171,9 @@ class TopHeadlinesBlock extends BlockBase implements ContainerFactoryPluginInter
   public function build(): array {
     $config = $this->getConfiguration();
 
-    $build = [];
+    $build = [
+      '#theme' => 'dp_top_headlines',
+    ];
 
     $parameters = [
       'language' => $this->languageManager->getCurrentLanguage()->getId(),
@@ -180,9 +182,7 @@ class TopHeadlinesBlock extends BlockBase implements ContainerFactoryPluginInter
     try {
       $articles = $this->newsProviderFactory->provider($config['news_provider'])->getLatestNews($parameters);
 
-      $build['articles'] = [
-        '#markup' => $articles,
-      ];
+      $build['#articles'] = $articles;
     }
     catch (\Exception $e) {
       $this->loggerFactory->error($e->getMessage());

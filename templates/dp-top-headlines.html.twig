@@ -1,0 +1,38 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display the top headlines.
+ *
+ * Available variables:
+ * - articles: A list articles.
+ *   - content: Content of the article. This field can contain null value.
+ *   - description: A description of the article. This field can contain null value.
+ *   - imageUrl: The URL to a relevant image for the article. This field can contain null value.
+ *   - publishedAt: The published date of the article. This field can contain null value.
+ *   - source: The name of the source of this article came from. This field can contain null value.
+ *   - title: The headline or title of the article.
+ *   - url: The direct URL to the article.
+ *
+ * @ingroup themeable
+ */
+#}
+
+<div class="top-headlines">
+  {% for article in articles|slice(0,3) %}
+    <div class="headline">
+      <h5 class="headline-title"><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></h5>
+
+      {% if article.description %}
+        <p class="headline-description">{{ article.description }}</p>
+      {% endif %}
+
+      {% if article.publishedAt %}
+        <p class="headline-meta">
+          {{ 'Posted on'|t }} {{ article.publishedAt|date('F j, Y') }}
+        </p>
+      {% endif %}
+    </div>
+  {% else %}
+    <p>{{ 'No articles found.'|t }}</p>
+  {% endfor %}
+</div>
