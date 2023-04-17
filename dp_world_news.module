@@ -8,12 +8,13 @@
 /**
  * Implements hook_theme().
  */
-function dp_world_news_theme() {
+function dp_world_news_theme($existing, $type, $theme, $path) {
   return [
     'dp_top_headlines' => [
       'variables' => [
         'articles' => [],
       ],
+      'template' => 'dp-top-headlines',
     ],
   ];
 }

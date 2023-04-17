@@ -16,11 +16,10 @@
  * @ingroup themeable
  */
 #}
-
 <div class="top-headlines">
-  {% for article in articles|slice(0,3) %}
+  {% for article in articles %}
     <div class="headline">
-      <h5 class="headline-title"><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></h5>
+      <h3 class="headline-title"><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></h3>
 
       {% if article.description %}
         <p class="headline-description">{{ article.description }}</p>
