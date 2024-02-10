@@ -65,12 +65,13 @@ class DpWorldNewsSettingsFormTest extends BrowserTestBase {
     );
 
     // Test form submission.
+    $submitButton = (string) t('Save configuration');
     $this->submitForm(
       [
         'news_api_api_key' => 'api_key',
         'news_data_api_key' => 'api_key',
       ],
-      t('Save configuration')
+      $submitButton
     );
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->pageTextContains('The configuration options have been saved.');
