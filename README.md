@@ -2,7 +2,7 @@
 
 The World News Drupal module enables users to fetch and display the latest world news from [News API](https://newsapi.org/) and [NEWSDATA.IO](https://newsdata.io/) providers.
 
-The current version of the module is `1.0.0`.
+The current version of the module is `1.0.1`.
 For a list of changes made in the module, please refer to the [Changelog](CHANGELOG.md).
 
 ## Requirements
