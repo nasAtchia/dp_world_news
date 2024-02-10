@@ -2,9 +2,9 @@
 
 namespace Drupal\dp_world_news\Provider;
 
+use Drupal\dp_world_news\AbstractNewsProvider;
 use Drupal\dp_world_news\Article;
 use Drupal\dp_world_news\NewsProviderInterface;
-use Drupal\dp_world_news\AbstractNewsProvider;
 use GuzzleHttp\RequestOptions;
 
 /**
